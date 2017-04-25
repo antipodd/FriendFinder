@@ -4,7 +4,7 @@
 // This data source hold information on friends.
 // ===============================================================================
 
-var friendData = require("../data/friends");
+var friendData = require("../data/friends.js");
 
 
 // ===============================================================================
@@ -18,7 +18,7 @@ module.exports = function(app) {
   // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
 
-  app.get("/api/tables", function(req, res) {
+  app.get("/api/friends", function(req, res) {
     res.json(friendData);
   });
 
@@ -35,6 +35,8 @@ module.exports = function(app) {
     
       var newFriend = req.body;
 
+      console.log(newFriend);
+
       var bestMatches = [];
 
       var match = {
@@ -46,12 +48,18 @@ module.exports = function(app) {
       var newFriendName = newFriend.name;
       var newFriendPhoto = newFriend.photo;
       var newFriendScore = newFriend.scores;
+
+      for (var j = 0; j < newFriendScore.length; j++) {
+        console.log(newFriendScore[i]);
+      }
       
       // Add new data to the existing friends data.
       //do this last so don't match with latest user??
       friendData.push(newFriend);
       
-    
+      //need to have a response to the modal
+      res.json(bestMatches);
+
   });
 
   // ---------------------------------------------------------------------------

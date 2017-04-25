@@ -8,6 +8,10 @@ module.exports = function(app) {
 	  res.sendFile(path.join(__dirname, "/../public/survey.html"));
 	});
 
+	app.get("/assets/javascript/app.js", function(req, res) {
+		res.sendFile(path.join(__dirname, "/../public/assets/javascript/app.js"))
+	});
+
 	//if no existing matching route is found then direct user to homepage
 	app.use(function(req, res){
 		res.sendFile(path.join(__dirname + "/../public/home.html"));
