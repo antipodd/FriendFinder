@@ -30,35 +30,48 @@ module.exports = function(app) {
   // Then the server saves the data to the tableData array)
   // ---------------------------------------------------------------------------
 
-  app.post("/api/friends", function(req, res) {
+  app.post("/api/new", function(req, res) {
     
     
       var newFriend = req.body;
 
-      console.log(newFriend);
+      //console.log(newFriend);
 
       var bestMatches = [];
 
+      //impossible to have a difference greater than 40
       var match = {
       	name: "",
       	photo: "",
-      	difference: "",
+      	difference: 50,
       };
 
-      var newFriendName = newFriend.name;
-      var newFriendPhoto = newFriend.photo;
       var newFriendScore = newFriend.scores;
 
-      for (var j = 0; j < newFriendScore.length; j++) {
-        console.log(newFriendScore[i]);
+
+      for (var i = 0; i < friendData.length; i++) {
+        var friendDifference = 0;
+        //console.log(friendData[i].scores);
+        for (var j = 0; j < friendData[i].scores.length; j++) {
+          friendDifference += Math.abs(parseInt(friendData[i].scores[j]) - parseInt(newFriendScore[j]))
+          //console.log(typeof newFriendScore[j]);
+        }
+        //console.log(friendDifference);
+        if (match.difference > friendDifference) {
+          match.name = friendData[i].name;
+          match.photo = friendData[i].photo;
+          match.difference = friendDifference;
+        }
       }
-      
+
+      console.log(match);
+    
       // Add new data to the existing friends data.
       //do this last so don't match with latest user??
       friendData.push(newFriend);
       
-      //need to have a response to the modal
-      res.json(bestMatches);
+      //send the match to the modal
+      //res.json(bestMatches);
 
   });
 
