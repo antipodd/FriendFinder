@@ -189,6 +189,22 @@ var friendArray = [{
 			"5",
 			"5"
 			]
+		},
+		{
+			"name": "Chris Traeger Twin",
+			"photo": "https://s-media-cache-ak0.pinimg.com/originals/14/d6/1f/14d61f449f7753f29be96a25aa3ae29c.jpg",
+			"scores": [
+			"3",
+			"5",
+			"5",
+			"3",
+			"1",
+			"1",
+			"4",
+			"3",
+			"5",
+			"5"
+			]
 		}
 ]
 

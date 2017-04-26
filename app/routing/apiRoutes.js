@@ -39,6 +39,8 @@ module.exports = function(app) {
 
       var bestMatches = [];
 
+      var matches = [];
+
       //impossible to have a difference greater than 40
       var match = {
       	name: "",
@@ -61,18 +63,25 @@ module.exports = function(app) {
           match.name = friendData[i].name;
           match.photo = friendData[i].photo;
           match.difference = friendDifference;
+          /*console.log(match);
+          bestMatches.push(match);*/
         }
+
+        
+
       }
 
-      console.log(match);
+      //console.log(match);
+
+      console.log(bestMatches);
     
       // Add new data to the existing friends data.
-      //do this last so don't match with latest user??
+      //do this last so don't match with latest user
       friendData.push(newFriend);
       
       //send the match to the modal
-      //res.json(bestMatches);
-
+      //res.json(match);
+      res.json(bestMatches);
   });
 
   // ---------------------------------------------------------------------------
