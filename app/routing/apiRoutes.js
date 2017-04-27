@@ -39,14 +39,14 @@ module.exports = function(app) {
 
       var bestMatches = [];
 
-      var matches = [];
+      var differencesArray = [];
 
       //impossible to have a difference greater than 40
-      var match = {
+      /*var match = {
       	name: "",
       	photo: "",
       	difference: 50,
-      };
+      };*/
 
       var newFriendScore = newFriend.scores;
 
@@ -58,18 +58,42 @@ module.exports = function(app) {
           friendDifference += Math.abs(parseInt(friendData[i].scores[j]) - parseInt(newFriendScore[j]))
           //console.log(typeof newFriendScore[j]);
         }
+        //collects all the differences
+        differencesArray.push(friendDifference);
         //console.log(friendDifference);
-        if (match.difference > friendDifference) {
+        /*if (match.difference > friendDifference) {
           match.name = friendData[i].name;
           match.photo = friendData[i].photo;
-          match.difference = friendDifference;
+          match.difference = friendDifference;*/
           /*console.log(match);
           bestMatches.push(match);*/
         }
+        // find the minimum difference
+        var minDifference;
+        for (var i = 0; i < differencesArray.length; i++) {
+          if (i === 0) {
+            minDifference = differencesArray[i];
+          } else if (minDifference > differencesArray[i]) {
+            minDifference = differencesArray[i];
+          }
+        }
 
-        
+        //loop through differencesArray to find how many instances of minimum difference occur and push data to best matches
+        for (var i = 0; i < differencesArray.length; i++) {
+          if (minDifference === differencesArray[i]) {
+            var match = {
+              name: friendData[i].name,
+              photo: friendData[i].photo,
+              difference: minDifference,
+            };
+            /*match.name = friendData[i].name;
+            match.photo = friendData[i].photo;
+            match.difference = minDifference;*/
+            bestMatches.push(match);
+          }
+        }
 
-      }
+      
 
       //console.log(match);
 
